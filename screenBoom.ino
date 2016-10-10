@@ -1,6 +1,6 @@
 /*
- This is an arduino timer that will 
- automatically log you out of your computer
+  This is an arduino timer that will
+  automatically log you out of your computer
             ***beware of unsaved files!!!***
   Screen Timer v2
   Aurthor: James Shih
@@ -8,7 +8,6 @@
   https://www.arduino.cc/en/Reference/KeyboardModifiers
   https://www.arduino.cc/en/Reference/KeyboardPress
 */
-
 #include <LiquidCrystal.h>
 #include <Keyboard.h>
 #include <HID.h>
@@ -34,7 +33,7 @@ void setup() {
 void loop() {
   val = analogRead(potPin);
   photoVal = analogRead(photoPin);
-  counter = map(val, 0, 1024, 0, 600);
+  counter = map(val, 0, 1016, 0, 600); //map to 600 seconds
   long cTime = millis();
   Serial.print(photoVal);
   Serial.print("      ");
@@ -48,10 +47,13 @@ void loop() {
       lcd.setCursor(0, 0);
       lcd.print("Set Timer:");
       lcd.setCursor(0, 1);
+      lcd.print("    ");
       lcd.print(counter);
-      lcd.print("   ");
+      lcd.print("  seconds");
+      lcd.print("    ");
 
       if (photoVal <= 300) {
+        tone(9, 3000, 100); //set time sound
         countNum = counter;
         lcd.clear();
         caseState++;
@@ -60,13 +62,16 @@ void loop() {
 
     case 1:
       lcd.setCursor(0, 0);
-      lcd.print("Timer Set:");
+      lcd.print("Time Left:");
       lcd.setCursor(0, 1);
       if (cTime - pTime >= 1000 && countNum > 0) {
         pTime = cTime;
+        tone(9, 2500, 100);
         countNum--;
+        lcd.print("    ");
         lcd.print(countNum);
-        lcd.print("   ");
+        lcd.print("  seconds");
+        lcd.print("    ");
       } else if (countNum <= 0) {
         lcd.clear();
         caseState++;
@@ -79,13 +84,17 @@ void loop() {
       lcd.print("BOOM!");
       lcd.setCursor(0, 1);
       lcd.print("");
+      //Boom sound effect
+      tone(9, 400, 800);
+      delay(400);
+      tone(9, 200, 1000);
       //Logout Mac
       Keyboard.press(cmdKey);
       Keyboard.press(shfKey);
       Keyboard.press('q');
-      //delay(100);
-      //Keyboard.press(rtnKey);
       delay(100);
+      Keyboard.releaseAll();
+      Keyboard.press(rtnKey);
       Keyboard.releaseAll();
       delay(6000);
       lcd.clear();
