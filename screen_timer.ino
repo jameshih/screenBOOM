@@ -1,6 +1,6 @@
 /*
   Screen Timer v1
-  Author: James Shih
+  Aurthor: James Shih
   references
   https://www.arduino.cc/en/Reference/KeyboardModifiers
   https://www.arduino.cc/en/Reference/KeyboardPress
