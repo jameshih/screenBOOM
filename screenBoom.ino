@@ -1,3 +1,14 @@
+/*
+ This is an arduino timer that will 
+ automatically log you out of your computer
+            ***beware of unsaved files!!!***
+  Screen Timer v2
+  Author: James Shih
+  references
+  https://www.arduino.cc/en/Reference/KeyboardModifiers
+  https://www.arduino.cc/en/Reference/KeyboardPress
+*/
+
 #include <LiquidCrystal.h>
 #include <Keyboard.h>
 #include <HID.h>
