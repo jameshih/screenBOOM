@@ -3,7 +3,7 @@
  automatically log you out of your computer
             ***beware of unsaved files!!!***
   Screen Timer v2
-  Author: James Shih
+  Aurthor: James Shih
   references
   https://www.arduino.cc/en/Reference/KeyboardModifiers
   https://www.arduino.cc/en/Reference/KeyboardPress
